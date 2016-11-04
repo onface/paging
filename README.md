@@ -80,4 +80,4 @@ nextSomePage
 
 再根据上面的数据与模板引擎结合，渲染 HTML
 
-createData 实现方法可参考 [paging.js createData](https://github.com/paging/paging/blob/master/lib/createData)
+createData 实现方法可参考 [paging.js createData](https://github.com/paging/paging/blob/master/lib/createData.js)
