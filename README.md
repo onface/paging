@@ -30,51 +30,51 @@ Paging 提供了一套基于模板渲染的分页生成方案，不限编程语�
 正常一个分页需要如下基础数据：
 
 
-1. `page`  当前页码 **(必须)** `9`
-2. `pageCount` 总页数 **(必须存在 `pageCount` 或者存在 `pageSize` 和 `dataCount`)** `20`
-3. `pageSize` 每页显示数据数 **(没有 pageCount 时候必须存在此数据)** `10`
-4. `dataCount` 总数据量 **(没有 pageCount 时候必须存在此数据)** `200`
-5. `prevPages` 显示`page`前多少页 `3`
-6. `nextPages` 显示`page`后多少页 `3`
-7. `prevSomePage` 显示 `page` 前指定页 `5`
-7. `nextSomePage` 显示 `page` 后指定页 `5`
+1. `page` `9` 当前页码 **(必须)** 
+2. `pageCount` `20` 总页数 **(必须存在 `pageCount` 或者存在 `pageSize` 和 `dataCount`)** 
+3. `pageSize` `10` 每页显示数据数 **(没有 pageCount 时候必须存在此数据)** 
+4. `dataCount` `200` 总数据量 **(没有 pageCount 时候必须存在此数据)** 
+5. `prevPages` `3` 显示`page`前多少页 
+6. `nextPages` `3` 显示`page`后多少页 
+7. `prevSomePage` `5` 显示 `page` 前指定页 
+7. `nextSomePage` `5` 显示 `page` 后指定页
 
 
 ```js
 // {Bolean} 存在分页
 hasPaging
 
-// {Number} 总页数 20
+// {Number} 20 总页数 
 pageCount
 
-// {Number} 总数据量 200
+// {Number} 200 总数据量 
 dataCount
 
-// {Number} 当前页 9
+// {Number} 9 当前页 
 page
 
-// {Boolean} 当前页是第一页 false
+// {Boolean} false 当前页是第一页 
 isFirstPage
 
-// {Boolean} 当前页是最后一页 false
+// {Boolean} false 当前页是最后一页
 isLastPage
 
-// {Array,false} 当前页前几页 [6,7,8] 不存在前几页则为 false (根据 传入的 prevPages 扩展)
+// {Array,Boolean} [6,7,8] false 当前页前几页不存在前几页则为 false (根据 传入的 prevPages 扩展)
 prevPages
 
-// {Array} 当前页后几页 [10,11,12] 不存在后几页则为 false (根据 传入的 prevPages 扩展)
+// {Array,Boolean} [10,11,12] false 当前页后几页  不存在后几页则为 false (根据 传入的 prevPages 扩展)
 nextPages
 
-// {Number|false} 上一页 8
+// {Number} 8 上一页 
 prevPage
 
-// {Number|false} 下一页 10
+// {Number} 10 下一页 
 nextPage
 
-// {Number|false} 当前页前 5 页 4
+// {Number|Boolean} 4 当前页前 5 页 (根据 传入的 prevSomePage 决定是前几页)
 prevSomePage
 
-// {Number|false} 当前页后 5 页 14
+// {Number|Boolean} 14 当前页后 5 页 (根据 传入的 nextSomePage 决定是前几页)
 nextSomePage
 ```
 
