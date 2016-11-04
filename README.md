@@ -78,6 +78,6 @@ prevSomePage
 nextSomePage
 ```
 
-再根据上面的数据与模板引擎结合，渲染 HTML
+再根据上面的数据与模板引擎结合，渲染 HTML。最终配合 [paging-css](https://github.com/paging/paging-css) 实现完全自定义界面
 
 createData 实现方法可参考 [paging.js createData](https://github.com/paging/paging/blob/master/lib/createData.js)
