@@ -1,84 +1,83 @@
-# paging.github.io
-分页生成解决方案
+# Paging solution
 
-## 已实现语言版本
+> 分页生成解决方案
 
-[JavaScript](https://github.com/nimojs/paging)
+## 编程语言版本实现
+
+- [JavaScript](https://github.com/paging/paging-js)(已实现)
+- ~~[PHP](https://github.com/paging/paging-php)(未实现)~~
+- ~~[JAVA](https://github.com/paging/paging-java)(未实现)~~
+- ~~[Go](https://github.com/paging/paging-go)(未实现)~~
+- ~~[C](https://github.com/paging/paging-c)(未实现)~~
+- ~~[C++](https://github.com/paging/paging-cpp)(未实现)~~
+
+## 前端框架实现版本
+
+- ~~[react-paging](https://github.com/paging/react-paging)(未实现)~~
+- ~~[vue-paging](https://github.com/paging/vue-paging)(未实现)~~
+- ~~[ng-paging](https://github.com/paging/ng-paging)(未实现)~~
 
 ## 多语言实现原理
 
 分页生成在 Web 开发中非常常见，市面上也存在很多用于生成分页的分页函数。但都难以做到**完全自定义界面**。
 
-> 这里的完全自定义界面指的是分页生成的 HTML 不限制为 `<li class="paging">` 或 `<a class="paging">` 
+> 这里的完全自定义界面指的是分页生成的 HTML 不限制为 `<li class="paging-item">` 或 `<a class="paging-item">` 
 
-Paging 提供了一套基于模板引擎的分页生成方案，不限编程语言不限模板引擎类型。基于模板引擎实现的分页可以做到 **完全自定义界面**
+Paging 提供了一套基于模板渲染的分页生成方案，不限编程语言不限模板引擎类型。基于模板引擎实现的分页可以做到 **完全自定义界面**
 
 ### createData
 
-生成一个分页在数据层面只需要 2 个数据：当前页和总页数。根据这2个参数我们能扩展出如下数据：
+正常一个分页需要如下基础数据：
+
+
+1. `page`  当前页码 **(必须)** `9`
+2. `pageCount` 总页数 **(必须存在 `pageCount` 或者存在 `pageSize` 和 `dataCount`)** `20`
+3. `pageSize` 每页显示数据数 **(没有 pageCount 时候必须存在此数据)** `10`
+4. `dataCount` 总数据量 **(没有 pageCount 时候必须存在此数据)** `200`
+5. `prevPages` 显示`page`前多少页 `3`
+6. `nextPages` 显示`page`后多少页 `3`
+7. `prevSomePage` 显示 `page` 前指定页 `5`
+7. `nextSomePage` 显示 `page` 后指定页 `5`
+
 
 ```js
 // {Bolean} 存在分页
-_hasPaging
-// {Number} 总页数 10
-_pageCount
-// {Number} 当前页 5
-_currentPage
-// {Boolean} 当前页是第一页
-_isFirstPage
-// {Boolean} 当前页是最后一页
-_isLastPage
-// {Array} 当前页前几页 [2,3,4] 
-_beforePages
-// {Boolean} 是否存在前几页
-_hasBeforePages
-// {Array} 当前页后几页 [6,7,8]
-_afterPages
-// {Boolean} 是否存在后几页
-_hasAfterPages
-// {Number|false} 上一页 4
-_prevPage
-// {Number|false} 下一页 6
-_nextPage
-// {String}链接前缀替换字符
-_link
+hasPaging
+
+// {Number} 总页数 20
+pageCount
+
+// {Number} 总数据量 200
+dataCount
+
+// {Number} 当前页 9
+page
+
+// {Boolean} 当前页是第一页 false
+isFirstPage
+
+// {Boolean} 当前页是最后一页 false
+isLastPage
+
+// {Array,false} 当前页前几页 [6,7,8] 不存在前几页则为 false (根据 传入的 prevPages 扩展)
+prevPages
+
+// {Array} 当前页后几页 [10,11,12] 不存在后几页则为 false (根据 传入的 prevPages 扩展)
+nextPages
+
+// {Number|false} 上一页 8
+prevPage
+
+// {Number|false} 下一页 10
+nextPage
+
+// {Number|false} 当前页前 5 页 4
+prevSomePage
+
+// {Number|false} 当前页后 5 页 14
+nextSomePage
 ```
 
 再根据上面的数据与模板引擎结合，渲染 HTML
-以 [Mustache](http://mustache.github.io/) 为例
-```html
-{{#_hasPaging}}
-    <div class="ui-paging">
-        <{{#_prevPage}}a{{/_prevPage}}{{^_prevPage}}span{{/_prevPage}} class="ui-paging-prev" href="{{_link}}{{_prevPage}}">
-            <
-        </{{#_prevPage}}a{{/_prevPage}}{{^_prevPage}}span{{/_prevPage}}>
-        {{^_isFirstPage}}
-        <a href="{{_link}}1" class="ui-paging-item">1</a>
-        {{/_isFirstPage}}
-        {{#_hasBeforePages}}
-        <span class="ui-paging-ellipsis">...</span>
-        {{/_hasBeforePages}}
-        {{#_beforePages}}
-        <a class="ui-paging-item" href="{{_link}}{{.}}">{{.}}</a>
-        {{/_beforePages}}
-        <a href="{{_link}}{{_currentPage}}" class="ui-paging-item ui-paging-current">{{_currentPage}}</a>
-        {{#_afterPages}}
-        <a class="ui-paging-item" href="{{_link}}{{.}}">{{.}}</a>
-        {{/_afterPages}}
-        {{#_hasAfterPages}}
-        <span class="ui-paging-ellipsis">...</span>
-        {{/_hasAfterPages}}
-        {{^_isLastPage}}
-        <a href="{{_link}}{{_pageCount}}" class="ui-paging-item">{{_pageCount}}</a>
-        {{/_isLastPage}}
-        <{{#_nextPage}}a{{/_nextPage}}{{^_nextPage}}span{{/_nextPage}} class="ui-paging-next" href="{{_link}}{{_nextPage}}">
-            >
-        </{{#_nextPage}}a{{/_nextPage}}{{^_nextPage}}span{{/_nextPage}}>
-        <span class="ui-paging-info"><span class="ui-paging-bold">{{_currentPage}}/{{_pageCount}}</span>页</span>
-        <span class="ui-paging-which"><input value="{{_currentPage}}" type="text"></span>
-        <a class="ui-paging-info ui-paging-goto" href="{{_link}}{{_currentPage}}" >Go</a>
-    </div>
-{{/_hasPaging}}
-```
 
-createDate 实现方法可参考 [paging.js createDate](https://github.com/nimojs/paging/blob/master/paging.js#L36-L190)
+createData 实现方法可参考 [paging.js createData](https://github.com/paging/paging/blob/master/lib/createData)
