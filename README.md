@@ -34,8 +34,8 @@ Paging 提供了一套基于模板渲染的分页生成方案，不限编程语�
 2. `pageCount` `20` 总页数 **(必须存在 `pageCount` 或者存在 `pageSize` 和 `dataCount`)** 
 3. `pageSize` `10` 每页显示数据数 **(没有 pageCount 时候必须存在此数据)** 
 4. `dataCount` `200` 总数据量 **(没有 pageCount 时候必须存在此数据)** 
-5. `prevPages` `3` 显示`page`前多少页 
-6. `nextPages` `3` 显示`page`后多少页 
+5. `prevBatchPages` `3` 显示`page`前多少页 
+6. `nextBatchPages` `3` 显示`page`后多少页 
 7. `prevSomePage` `5` 显示 `page` 前指定页 
 7. `nextSomePage` `5` 显示 `page` 后指定页
 
@@ -60,16 +60,22 @@ isFirstPage
 isLastPage
 
 // {Array,Boolean} [6,7,8] false 当前页前几页不存在前几页则为 false (根据 传入的 prevPages 扩展)
-prevPages
+prevBatchPages
 
 // {Array,Boolean} [10,11,12] false 当前页后几页  不存在后几页则为 false (根据 传入的 prevPages 扩展)
-nextPages
+nextBatchPages
 
 // {Number} 8 上一页 
 prevPage
 
 // {Number} 10 下一页 
 nextPage
+
+// {Boolean} true 除了 prevBatchPages 和 第一页还存在其他页
+prevHasMorePages 
+
+// {Boolean} true除了 nextBatchPages 和 最后一页还存在其他页
+nextHasMorePages 
 
 // {Number|Boolean} 4 当前页前 5 页 (根据 传入的 prevSomePage 决定是前几页)
 prevSomePage
