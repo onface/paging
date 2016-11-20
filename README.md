@@ -87,6 +87,8 @@ prevSomePage
 
 // {Number|Boolean} 14 当前页后 5 页 (根据 传入的 nextSomePage 决定是前几页)
 nextSomePage
+// {Number} 每页显示多少条数据
+pageSize
 ```
 
 再根据上面的数据与模板引擎结合，渲染 HTML。最终配合 [paging-css](https://github.com/paging/paging-css) 实现完全自定义界面
