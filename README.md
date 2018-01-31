@@ -3,24 +3,25 @@
 > 分页生成解决方案
 
 ## 编程语言版本实现
-# Paging solution
 
-> 分页生成解决方案
+
+
+> 分页生成解决方案 Paging solution
 
 ## 编程语言版本实现
 
-- [JavaScript](https://github.com/paging/paging-js)(已实现)
-- ~~[PHP](https://github.com/paging/paging-php)(未实现)~~
-- ~~[JAVA](https://github.com/paging/paging-java)(未实现)~~
-- ~~[Go](https://github.com/paging/paging-go)(未实现)~~
-- ~~[C](https://github.com/paging/paging-c)(未实现)~~
-- ~~[C++](https://github.com/paging/paging-cpp)(未实现)~~
+- [JavaScript](https://github.com/onface/paging-js)
+- ~~[PHP](https://github.com/onface/paging-php)(未实现)~~
+- ~~[JAVA](https://github.com/onface/paging-java)(未实现)~~
+- ~~[Go](https://github.com/onface/paging-go)(未实现)~~
+- ~~[C](https://github.com/onface/paging-c)(未实现)~~
+- ~~[C++](https://github.com/onface/paging-cpp)(未实现)~~
 
 ## 前端框架实现版本
 
-- ~~[react-paging](https://github.com/paging/react-paging)(未实现)~~
-- ~~[vue-paging](https://github.com/paging/vue-paging)(未实现)~~
-- ~~[ng-paging](https://github.com/paging/ng-paging)(未实现)~~
+- [paging.react](https://github.com/onface/paging.react)
+- ~~[vue-paging](https://github.com/onface/paging.vue)(未实现)~~
+- ~~[ng-paging](https://github.com/onface/paging.ng)(未实现)~~
 
 ## 多语言实现原理
 
@@ -36,9 +37,9 @@ Paging 提供了一套基于模板渲染的分页生成方案，不限编程语�
 
 
 1. `page` `9` 当前页码 **(必须)** 
-2. `pageCount` `20` 总页数 **(必须存在 `pageCount` 或者存在 `pageSize` 和 `dataCount`)** 
+2. `pageCount` `20` 总页数 **(必须存在 `pageCount` 或者存在 `pageSize` 和 `dataTotal`)** 
 3. `pageSize` `10` 每页显示数据数 **(没有 pageCount 时候必须存在此数据)** 
-4. `dataCount` `200` 总数据量 **(没有 pageCount 时候必须存在此数据)** 
+4. `dataTotal` `200` 总数据量 **(没有 pageCount 时候必须存在此数据)** 
 5. `prevBatch` `3` 显示`page`前多少页 
 6. `nextBatch` `3` 显示`page`后多少页 
 7. `prevSomePage` `5` 显示 `page` 前指定页 
@@ -53,7 +54,7 @@ hasPaging
 pageCount
 
 // {Number} 200 总数据量 
-dataCount
+dataTotal
 
 // {Number} 9 当前页 
 page
@@ -91,6 +92,6 @@ nextSomePage
 pageSize
 ```
 
-再根据上面的数据与模板引擎结合，渲染 HTML。最终配合 [paging-css](https://github.com/paging/paging-css) 实现完全自定义界面
+再根据上面的数据与模板引擎结合，渲染 HTML。最终配合样式 [onface/design/paging](https://github.com/onface/design/tree/master/components/paging) 实现完全自定义界面
 
-createData 实现方法可参考 [paging.js createData](https://github.com/paging/paging/blob/master/lib/createData.js)
+createData 实现方法可参考 [paging.js createData](https://github.com/onface/paging-js/blob/master/lib/createData.js)
